@@ -1,0 +1,50 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": ["user_id", "national_id", "full_name", "email", "accounts", "device_fingerprints"],
+    "properties": {
+      "user_id": { "bsonType": "string", "description": "UUID string matching relational PK" },
+      "national_id": { "bsonType": "string" },
+      "full_name": { "bsonType": "string" },
+      "email": { "bsonType": "string" },
+      "kyc_level": { "bsonType": "int", "minimum": 1, "maximum": 3 },
+      "accounts": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "object",
+          "required": ["account_number", "currency", "balance", "status"],
+          "properties": {
+            "account_number": { "bsonType": "string" },
+            "currency": { "bsonType": "string" },
+            "balance": { "bsonType": "double" },
+            "status": { "bsonType": "string" }
+          }
+        }
+      },
+      "device_fingerprints": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "object",
+          "properties": {
+            "device_id": { "bsonType": "string" },
+            "ip_address": { "bsonType": "string" },
+            "last_login": { "bsonType": "date" }
+          }
+        }
+      },
+      "recent_transactions": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "object",
+          "properties": {
+            "transaction_id": { "bsonType": "string" },
+            "destination_account": { "bsonType": "string" },
+            "amount": { "bsonType": "double" },
+            "risk_score": { "bsonType": "double" },
+            "timestamp": { "bsonType": "date" }
+          }
+        }
+      }
+    }
+  }
+}
