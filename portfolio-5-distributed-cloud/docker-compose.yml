@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # Primary Database Node (Read/Write Master)
+  postgres_primary:
+    image: postgres:15-alpine
+    container_name: omnipay_pg_primary
+    environment:
+      POSTGRES_DB: omnipay_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: PrimaryPassword123!
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_primary_data:/var/lib/postgresql/data
+    networks:
+      - omnipay_net
+
+  # Secondary Database Node (Read-Only Replica / Standby)
+  postgres_replica:
+    image: postgres:15-alpine
+    container_name: omnipay_pg_replica
+    environment:
+      POSTGRES_DB: omnipay_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: PrimaryPassword123!
+    ports:
+      - "5433:5432"
+    depends_on:
+      - postgres_primary
+    volumes:
+      - pg_replica_data:/var/lib/postgresql/data
+    networks:
+      - omnipay_net
+
+volumes:
+  pg_primary_data:
+  pg_replica_data:
+
+networks:
+  omnipay_net:
+    driver: bridge
