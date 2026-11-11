@@ -3,7 +3,6 @@ XTIANBY PORTFOLIO
 # Advanced Database Systems Portfolio (MIT 8103)
 
 **Student Name:** Okonkwo Christian Chikelue  
-**GitHub Username:** Xtianby  
 **Selected Case Study:** OmniPay Switch Systems (Fintech Payment Switch & Digital Wallet Platform)  
 
 ## 1. Case Study & Business Scenario
